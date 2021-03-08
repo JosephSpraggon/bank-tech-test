@@ -12,6 +12,14 @@ describe Account do
     expect(subject.balance).to eq(0)
   end
 
+  it 'can store multiple transactions in the statement' do
+    allow(Time).to receive_message_chain(:now, :strftime).and_return("date1", "date2")
+
+    subject.deposit(500)
+    subject.withdraw(100)
+    expect(subject.statement).to eq("date1" => 500, "date2" => -100)
+  end
+
   context '#deposit' do
 
     it 'can add an amount to the balance' do

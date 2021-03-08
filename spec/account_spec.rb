@@ -19,6 +19,13 @@ describe Account do
       expect(subject.balance).to eq(500)
     end
 
+    it 'stores the date of the deposit' do
+      allow(Time).to receive(:now).and_return("date")
+
+      subject.deposit(500)
+      expect(subject.statement).to eq("date" => 500)
+    end
+
   end
 
   context '#withdraw' do 

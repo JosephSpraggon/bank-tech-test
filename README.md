@@ -1,6 +1,5 @@
 *Bank tech test*
 
-
 Today, you'll practice doing a tech test.
 
 For most tech tests, you'll essentially have unlimited time. This practice session is about producing the best code you can when there is a minimal time pressure.
@@ -32,3 +31,16 @@ date || credit || debit || balance
 14/01/2012 || || 500.00 || 2500.00
 13/01/2012 || 2000.00 || || 3000.00
 10/01/2012 || 1000.00 || || 1000.00
+
+
+
+
+*Planning*
+
+- one Account class, that will store all the data
+
+- deposit method that takes two arguments, amount(credit) & date
+
+- withdraw method that takes two arguments, amount(debit) & date
+
+- print method that displays, date, amount(credit or debit), total balance

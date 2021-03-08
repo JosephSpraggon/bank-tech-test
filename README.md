@@ -39,8 +39,8 @@ date || credit || debit || balance
 
 - one Account class, that will store all the data
 
-- deposit method that takes two arguments, amount(credit) & date
+- deposit method that takes two arguments, amount(credit) & date, will store these in the object as a key/value pair within a hash, as well as add amount to the balance
 
-- withdraw method that takes two arguments, amount(debit) & date
+- withdraw method that takes two arguments, amount(debit) & date, will store these in the object as a key/value pair within a hash, as well as minus amount to the balance
 
 - print method that displays, date, amount(credit or debit), total balance

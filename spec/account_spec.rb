@@ -10,4 +10,13 @@ describe Account do
     expect(subject.balance).to eq(0)
   end
 
+  context '#deposit' do
+
+    it 'can add an amount to the balance' do
+      subject.deposit(500)
+      expect(subject.balance).to eq(500)
+    end
+
+  end
+
 end

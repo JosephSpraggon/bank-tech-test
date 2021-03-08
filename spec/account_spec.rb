@@ -19,8 +19,8 @@ describe Account do
       expect(subject.balance).to eq(500)
     end
 
-    it 'stores the date of the deposit' do
-      allow(Time).to receive(:now).and_return("date")
+    it 'stores the date of the deposit in the statement' do
+      allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
 
       subject.deposit(500)
       expect(subject.statement).to eq("date" => 500)
@@ -33,6 +33,12 @@ describe Account do
     it 'can minus an amount from the balance' do
       test_account.withdraw(100)
       expect(test_account.balance).to eq(400)
+    end
+
+    it 'stores the date of the withdrawl in the statement' do
+      allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
+      test_account.withdraw(100)
+      expect(test_account.statement).to eq("date" => -100)
     end
 
   end

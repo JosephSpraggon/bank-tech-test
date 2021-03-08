@@ -7,12 +7,14 @@ class Account
   end
 
   def deposit(amount)
-    date = Time.now
+    date = Time.now.strftime("%d/%m/%Y")
     @statement.store(date, amount)
     @balance += amount
   end
 
   def withdraw(amount)
+    date = Time.now.strftime("%d/%m/%Y")
+    @statement.store(date, -amount)
     @balance -= amount
   end
 

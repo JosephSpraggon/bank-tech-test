@@ -1,5 +1,7 @@
-class Statement
+# frozen_string_literal: true
 
+# Statement class that handles creating the statement
+class Statement
   def initialize(transactions)
     @transactions = transactions
   end
@@ -8,14 +10,14 @@ class Statement
     create_statement
     display_statement
   end
-  
+
   private
 
   def create_statement
     statement_counters
-    @transactions.map do |date, amount|
+    @transactions.map do |_date, amount|
       @running_balance += amount
-      if is_deposit?
+      if deposit?
         add_deposit
       else
         add_withdraw
@@ -31,19 +33,22 @@ class Statement
   end
 
   def display_statement
-    "date || credit || debit || balance\n" + @display.join
+    "date || credit || debit || balance\n#{@display.join}"
   end
 
-  def is_deposit?
+  def deposit?
     @transactions.values[@index].positive?
   end
 
   def add_deposit
-    @display.push("#{@transactions.keys[@index].split(" ")[0]} || #{@transactions.values[@index]} || || #{@running_balance}\n")
+    @display.push(
+      "#{@transactions.keys[@index].split(' ')[0]} || #{@transactions.values[@index]} || || #{@running_balance}\n"
+    )
   end
 
   def add_withdraw
-    @display.push("#{@transactions.keys[@index].split(" ")[0]} || || #{-@transactions.values[@index]} || #{@running_balance}\n")
+    @display.push(
+      "#{@transactions.keys[@index].split(' ')[0]} || || #{-@transactions.values[@index]} || #{@running_balance}\n"
+    )
   end
-
 end

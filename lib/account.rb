@@ -19,9 +19,18 @@ class Account
   end
 
   def print
-    
+    display = []
+    index = 0
+    running_balance = 0.00
+    @statement.map do |date, amount|
+      running_balance += amount
+      display.push("#{statement.keys[index]} || || #{statement.values[index]} || #{running_balance}")
+      display.push("
+          ")
+      index += 1
+    end
     "date || credit || debit || balance
-        #{"date"} || || 500.00 || 500.00"
+        " + display.join
   end
 
 end

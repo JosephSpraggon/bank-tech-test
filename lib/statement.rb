@@ -8,8 +8,6 @@ class Statement
     create_statement
     display_statement
   end
-
-
   
   private
 

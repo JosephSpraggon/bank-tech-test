@@ -13,9 +13,7 @@ class Account
   end
 
   def withdraw(amount)
-    date
-    @transactions[@date] = -amount
-    @balance -= amount
+    withdraw_transaction(amount)
   end
 
   # def print_statement
@@ -36,6 +34,12 @@ class Account
     date
     @transactions[@date] = amount
     @balance += amount
+  end
+
+  def withdraw_transaction(amount)
+    date
+    @transactions[@date] = -amount
+    @balance -= amount
   end
 
   def date

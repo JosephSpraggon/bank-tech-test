@@ -2,14 +2,8 @@ require 'account'
 
 describe Account do
 
-  let(:test_account) {Account.new(500.00)}
-
   it 'can create an account object' do
     expect(subject).to be_an_instance_of(Account)
-  end
-
-  it 'a new account object has default balance of zero' do
-    expect(subject.balance).to eq(0.00)
   end
 
   it 'can store multiple transactions' do
@@ -22,11 +16,6 @@ describe Account do
 
   context '#deposit' do
 
-    it 'can add an amount to the balance' do
-      subject.deposit(500.00)
-      expect(subject.balance).to eq(500.00)
-    end
-
     it 'stores the date of the deposit' do
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
 
@@ -38,15 +27,12 @@ describe Account do
 
   context '#withdraw' do 
 
-    it 'can minus an amount from the balance' do
-      test_account.withdraw(100.00)
-      expect(test_account.balance).to eq(400.00)
-    end
-
     it 'stores the date of the withdrawl' do
+      
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
-      test_account.withdraw(100.00)
-      expect(test_account.transactions).to eq("date" => -100.00)
+      subject.deposit(500.00)
+      subject.withdraw(100.00)
+      expect(subject.transactions).to eq("date" => -100.00)
     end
 
   end

@@ -1,13 +1,13 @@
-# class Transaction
+class Transaction
 
-#   def initialize(amount)
-#     @amount = amount
-#   end
+  def initialize
+    @transactions = {}
+  end
 
-#   def deposit(amount)
-#     @date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
-#     @transactions[@date] = amount
-#     @balance += amount
-#   end
+  def deposit(amount)
+    @date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
+    @transactions[@date] = amount
+  end
 
-# end
+
+end

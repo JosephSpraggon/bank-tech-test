@@ -9,10 +9,12 @@ class Statement
     display_statement
   end
 
+
+  
   private
 
   def create_statement
-    create_statement_counters
+    statement_counters
     @transactions.map do |date, amount|
       @running_balance += amount
       if is_deposit?
@@ -24,15 +26,14 @@ class Statement
     end
   end
 
-  def create_statement_counters
+  def statement_counters
     @display = []
     @index = 0
     @running_balance = 0.00
   end
 
   def display_statement
-    "date || credit || debit || balance
-        " + @display.join
+    "date || credit || debit || balance\n" + @display.join
   end
 
   def is_deposit?
@@ -40,15 +41,11 @@ class Statement
   end
 
   def add_deposit
-    @display.push("#{@transactions.keys[@index].split(" ")[0]} || #{@transactions.values[@index]} || || #{@running_balance}")
-    @display.push("
-    ")
+    @display.push("#{@transactions.keys[@index].split(" ")[0]} || #{@transactions.values[@index]} || || #{@running_balance}\n")
   end
 
   def add_withdraw
-    @display.push("#{@transactions.keys[@index].split(" ")[0]} || || #{-@transactions.values[@index]} || #{@running_balance}")
-    @display.push("
-    ")
+    @display.push("#{@transactions.keys[@index].split(" ")[0]} || || #{-@transactions.values[@index]} || #{@running_balance}\n")
   end
 
 end

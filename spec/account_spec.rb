@@ -57,10 +57,8 @@ describe Account do
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
 
       subject.deposit(500.00)
-      expect(subject.print).to eq(
-        "date || credit || debit || balance
-        date || 500.0 || || 500.0
-    ")
+      expect{subject.print_statement}.to output(
+        "date || credit || debit || balance\ndate || 500.0 || || 500.0\n").to_stdout
     end
 
     it 'can print multiple deposit transactions in the correct format' do
@@ -68,11 +66,8 @@ describe Account do
 
       subject.deposit(500.00)
       subject.deposit(100.00)
-      expect(subject.print).to eq(
-        "date || credit || debit || balance
-        date1 || 500.0 || || 500.0
-    date2 || 100.0 || || 600.0
-    ")
+      expect{subject.print_statement}.to output(
+        "date || credit || debit || balance\ndate1 || 500.0 || || 500.0\ndate2 || 100.0 || || 600.0\n").to_stdout
     end
 
     it 'can print withdraw transactions in the correct format' do
@@ -80,11 +75,8 @@ describe Account do
       
       subject.deposit(500.00)
       subject.withdraw(200.00)
-      expect(subject.print).to eq(
-        "date || credit || debit || balance
-        date1 || 500.0 || || 500.0
-    date2 || || 200.0 || 300.0
-    ")
+      expect{subject.print_statement}.to output(
+      "date || credit || debit || balance\ndate1 || 500.0 || || 500.0\ndate2 || || 200.0 || 300.0\n").to_stdout
     end
 
   end

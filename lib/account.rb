@@ -18,6 +18,7 @@ class Account
     @balance -= amount
   end
 
+
   def print
     display = []
     index = 0
@@ -25,11 +26,11 @@ class Account
     @statement.map do |date, amount|
       running_balance += amount
       if statement.values[index].positive?
-        display.push("#{statement.keys[index]} || #{statement.values[index]} || || #{running_balance}")
+        display.push("#{statement.keys[index].split(" ")[0]} || #{statement.values[index]} || || #{running_balance}")
         display.push("
           ")
       else
-        display.push("#{statement.keys[index]} || || #{-statement.values[index]} || #{running_balance}")
+        display.push("#{statement.keys[index].split(" ")[0]} || || #{-statement.values[index]} || #{running_balance}")
         display.push("
           ")
       end

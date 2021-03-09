@@ -53,13 +53,13 @@ describe Account do
 
   context '#print' do
 
-    it 'can print one  deposit transaction in the correct format' do
+    it 'can print one deposit transaction in the correct format' do
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
 
       subject.deposit(500.00)
       expect(subject.print).to eq(
         "date || credit || debit || balance
-        date || || 500.0 || 500.0
+        date || 500.0 || || 500.0
           ")
     end
 
@@ -70,8 +70,20 @@ describe Account do
       subject.deposit(100.00)
       expect(subject.print).to eq(
         "date || credit || debit || balance
-        date1 || || 500.0 || 500.0
-          date2 || || 100.0 || 600.0
+        date1 || 500.0 || || 500.0
+          date2 || 100.0 || || 600.0
+          ")
+    end
+
+    it 'can print withdraw transactions in the correct format' do
+      allow(Time).to receive_message_chain(:now, :strftime).and_return("date1", "date2")
+      
+      subject.deposit(500.00)
+      subject.withdraw(200.00)
+      expect(subject.print).to eq(
+        "date || credit || debit || balance
+        date1 || 500.0 || || 500.0
+          date2 || || 200.0 || 300.0
           ")
     end
 

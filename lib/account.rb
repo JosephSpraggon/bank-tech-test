@@ -24,9 +24,15 @@ class Account
     running_balance = 0.00
     @statement.map do |date, amount|
       running_balance += amount
-      display.push("#{statement.keys[index]} || || #{statement.values[index]} || #{running_balance}")
-      display.push("
+      if statement.values[index].positive?
+        display.push("#{statement.keys[index]} || #{statement.values[index]} || || #{running_balance}")
+        display.push("
           ")
+      else
+        display.push("#{statement.keys[index]} || || #{-statement.values[index]} || #{running_balance}")
+        display.push("
+          ")
+      end
       index += 1
     end
     "date || credit || debit || balance

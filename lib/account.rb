@@ -1,43 +1,64 @@
+require_relative 'statement'
+
 class Account
-  attr_reader :balance, :statement
+  attr_reader :balance, :transactions
 
   def initialize(balance = 0.00)
     @balance = balance
-    @statement = {}
+    @transactions = {}
   end
 
   def deposit(amount)
     date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
-    @statement[date] = amount
+    @transactions[date] = amount
     @balance += amount
   end
 
   def withdraw(amount)
     date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
-    @statement[date] = -amount
+    @transactions[date] = -amount
     @balance -= amount
   end
 
+  # def print_statement
+  #   @statement = Statement.new(@transactions)
+  #   puts @statement.print
+  # end
 
   def print
-    display = []
-    index = 0
-    running_balance = 0.00
-    @statement.map do |date, amount|
-      running_balance += amount
-      if statement.values[index].positive?
-        display.push("#{statement.keys[index].split(" ")[0]} || #{statement.values[index]} || || #{running_balance}")
-        display.push("
-          ")
+    @display = []
+    @index = 0
+    @running_balance = 0.00
+    @transactions.map do |date, amount|
+      @running_balance += amount
+      if is_deposit?
+        add_deposit
       else
-        display.push("#{statement.keys[index].split(" ")[0]} || || #{-statement.values[index]} || #{running_balance}")
-        display.push("
-          ")
+        add_withdraw
       end
-      index += 1
+      @index += 1
     end
     "date || credit || debit || balance
-        " + display.join
+        " + @display.join
   end
+
+  private
+
+  def is_deposit?
+    transactions.values[@index].positive?
+  end
+
+  def add_deposit
+    @display.push("#{transactions.keys[@index].split(" ")[0]} || #{transactions.values[@index]} || || #{@running_balance}")
+    @display.push("
+    ")
+  end
+
+  def add_withdraw
+    @display.push("#{transactions.keys[@index].split(" ")[0]} || || #{-transactions.values[@index]} || #{@running_balance}")
+    @display.push("
+    ")
+  end
+
 
 end

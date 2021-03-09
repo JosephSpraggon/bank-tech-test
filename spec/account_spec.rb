@@ -12,12 +12,12 @@ describe Account do
     expect(subject.balance).to eq(0.00)
   end
 
-  it 'can store multiple transactions in the statement' do
+  it 'can store multiple transactions' do
     allow(Time).to receive_message_chain(:now, :strftime).and_return("date1", "date2")
 
     subject.deposit(500.00)
     subject.withdraw(100.00)
-    expect(subject.statement).to eq("date1" => 500.00, "date2" => -100.00)
+    expect(subject.transactions).to eq("date1" => 500.00, "date2" => -100.00)
   end
 
   context '#deposit' do
@@ -27,11 +27,11 @@ describe Account do
       expect(subject.balance).to eq(500.00)
     end
 
-    it 'stores the date of the deposit in the statement' do
+    it 'stores the date of the deposit' do
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
 
       subject.deposit(500.00)
-      expect(subject.statement).to eq("date" => 500.00)
+      expect(subject.transactions).to eq("date" => 500.00)
     end
 
   end
@@ -43,10 +43,10 @@ describe Account do
       expect(test_account.balance).to eq(400.00)
     end
 
-    it 'stores the date of the withdrawl in the statement' do
+    it 'stores the date of the withdrawl' do
       allow(Time).to receive_message_chain(:now, :strftime ).and_return("date")
       test_account.withdraw(100.00)
-      expect(test_account.statement).to eq("date" => -100.00)
+      expect(test_account.transactions).to eq("date" => -100.00)
     end
 
   end
@@ -60,7 +60,7 @@ describe Account do
       expect(subject.print).to eq(
         "date || credit || debit || balance
         date || 500.0 || || 500.0
-          ")
+    ")
     end
 
     it 'can print multiple deposit transactions in the correct format' do
@@ -71,8 +71,8 @@ describe Account do
       expect(subject.print).to eq(
         "date || credit || debit || balance
         date1 || 500.0 || || 500.0
-          date2 || 100.0 || || 600.0
-          ")
+    date2 || 100.0 || || 600.0
+    ")
     end
 
     it 'can print withdraw transactions in the correct format' do
@@ -83,8 +83,8 @@ describe Account do
       expect(subject.print).to eq(
         "date || credit || debit || balance
         date1 || 500.0 || || 500.0
-          date2 || || 200.0 || 300.0
-          ")
+    date2 || || 200.0 || 300.0
+    ")
     end
 
   end

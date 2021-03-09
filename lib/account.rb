@@ -9,14 +9,14 @@ class Account
   end
 
   def deposit(amount)
-    date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
-    @transactions[date] = amount
+    date
+    @transactions[@date] = amount
     @balance += amount
   end
 
   def withdraw(amount)
-    date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
-    @transactions[date] = -amount
+    date
+    @transactions[@date] = -amount
     @balance -= amount
   end
 
@@ -26,19 +26,20 @@ class Account
   # end
 
   def print
-    @display = []
-    @index = 0
-    @running_balance = 0.00
     create_statement
-    "date || credit || debit || balance
-        " + @display.join
+    display_statement
   end
 
 
 
   private
 
+  def date
+    @date = Time.now.strftime("%d/%m/%Y %H:%M:%S")
+  end
+
   def create_statement
+    create_statement_counters
     @transactions.map do |date, amount|
       @running_balance += amount
       if is_deposit?
@@ -48,6 +49,17 @@ class Account
       end
       @index += 1
     end
+  end
+
+  def create_statement_counters
+    @display = []
+    @index = 0
+    @running_balance = 0.00
+  end
+
+  def display_statement
+    "date || credit || debit || balance
+        " + @display.join
   end
 
 

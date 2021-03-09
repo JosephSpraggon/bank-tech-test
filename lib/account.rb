@@ -29,6 +29,16 @@ class Account
     @display = []
     @index = 0
     @running_balance = 0.00
+    create_statement
+    "date || credit || debit || balance
+        " + @display.join
+  end
+
+
+
+  private
+
+  def create_statement
     @transactions.map do |date, amount|
       @running_balance += amount
       if is_deposit?
@@ -38,11 +48,8 @@ class Account
       end
       @index += 1
     end
-    "date || credit || debit || balance
-        " + @display.join
   end
 
-  private
 
   def is_deposit?
     transactions.values[@index].positive?

@@ -9,9 +9,7 @@ class Account
   end
 
   def deposit(amount)
-    date
-    @transactions[@date] = amount
-    @balance += amount
+    deposit_transaction(amount)
   end
 
   def withdraw(amount)
@@ -33,6 +31,12 @@ class Account
 
 
   private
+
+  def deposit_transaction(amount)
+    date
+    @transactions[@date] = amount
+    @balance += amount
+  end
 
   def date
     @date = Time.now.strftime("%d/%m/%Y %H:%M:%S")

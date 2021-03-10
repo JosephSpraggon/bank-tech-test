@@ -33,7 +33,7 @@ describe Account do
     end
   end
 
-  context '#print' do
+  context '#print_statement' do
     it 'can print one deposit transaction in the correct format' do
       allow(Time).to receive_message_chain(:now, :strftime).and_return('date')
 

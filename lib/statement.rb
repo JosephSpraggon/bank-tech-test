@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Statement class that handles creating the statement
+# Statement class that handles printing the statement
 class Statement
   def initialize(transactions)
     @transactions = transactions
@@ -16,7 +16,7 @@ class Statement
   def create_statement
     statement_counters
     @transactions.map do |_date, amount|
-      @running_balance += amount
+      @balance += amount
       if deposit?
         add_deposit
       else
@@ -29,7 +29,7 @@ class Statement
   def statement_counters
     @display = []
     @index = 0
-    @running_balance = 0.00
+    @balance = 0.00
   end
 
   def display_statement
@@ -42,13 +42,13 @@ class Statement
 
   def add_deposit
     @display.push(
-      "#{@transactions.keys[@index].split(' ')[0]} || #{@transactions.values[@index]} || || #{@running_balance}\n"
+      "#{@transactions.keys[@index].split(' ')[0]} || #{@transactions.values[@index]} || || #{@balance}\n"
     )
   end
 
   def add_withdraw
     @display.push(
-      "#{@transactions.keys[@index].split(' ')[0]} || || #{-@transactions.values[@index]} || #{@running_balance}\n"
+      "#{@transactions.keys[@index].split(' ')[0]} || || #{-@transactions.values[@index]} || #{@balance}\n"
     )
   end
 end

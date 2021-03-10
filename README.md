@@ -28,6 +28,8 @@ In the command-line make sure you're within the bank-tech-test directory and run
 
 Then create a new account using 'Account.new' then you can begin to make deposits '.deposit(100)', withdrawals '.withdraw(50)' and then to see your bank statement printed to the console use '.print_statement'!
 
+<img width="1427" alt="Screenshot 2021-03-10 at 14 47 54" src="https://user-images.githubusercontent.com/74933838/110654708-4b29e580-81b6-11eb-8be8-e4e705324326.png">
+
  --------------------------------------------------
 
 *Client Specification:*
